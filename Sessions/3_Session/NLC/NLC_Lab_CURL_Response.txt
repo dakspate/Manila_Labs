@@ -1,0 +1,99 @@
+{
+  "url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
+  "username": "2f6b3437-7857-46bb-bdd5-99e3a3d22a30",
+  "password": "KSuzM2yCyGW8"
+}
+
+
+Step 1 : Create classifier
+------------------------------------------
+CURL Request :
+curl -k -i --user "2f6b3437-7857-46bb-bdd5-99e3a3d22a30":"KSuzM2yCyGW8" -F training_data=@weather_data_train.csv -F training_metadata="{\"language\":\"en\",\"name\":\"TutorialClassifier\"}" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"
+
+CURL Response :
+HTTP/1.1 100 Continue
+X-Note: Gateway Ack
+
+HTTP/1.1 200 OK
+X-Backside-Transport: OK OK
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+X-Content-Type-Options: nosniff
+Content-Security-Policy: default-src 'none'
+Pragma: no-cache
+Expires: 0
+X-XSS-Protection: 1
+Date: Fri, 23 Jun 2017 12:18:41 GMT
+Cache-control: no-cache, no-store
+Content-Type: application/json
+Server: -
+Set-Cookie: Watson-DPAT=r3mFyHUX2uhdEJ0Jnjwd2%2Foeh%2F8iSczwAL5sZ712VRONL6XHhscU
+QXDjfLLrb2fVjtwAeCSVwi2p8wBJc%2B18AYfsywP69XuukkwsIW2QRvu%2BFkpD4M4igJmsA5Di6nTz
+7Iv0Cbg%2BhixOLlrPHnPDW4b%2FF9eI52WofVNU4JUn77EYprzIlsuOUTudj5BDDmQWy82usg8UfQi5
+5ehYIRcDkneQVUgGLr0I8yK3Wm8C9ZHBHjxtXTMZxKhXD9zR0Clk7zJuxicrmf8tAQfVPYoiShJZWyIE
+TQPqmCq6ohvfHoLOWh6WY5J5a3k6v0%2FY%2B8RhszasGkQyHFWAWIRD8umjFgMGOw8%2F49B6SZTBWn
+Din0lpBu1B%2F6Gd%2BzgZdWpbr9WRjcbS4LiDGQL71y%2FG0Hhhq65%2BXn%2FgOIQ9bCt357OeRO8k
+hZ68dOIlttFEsbdg%2BZbll6%2FCkeHyLfdVnAA5N14b1JoJn7L056r7peMP5KQC5Kf18xc8TPRQ5Th4
+3bO8gbs%2FvO3khmFynUvif%2FViC%2BQufnXpDgeS1POLAhxtVoxxkSdsZ8ed1zsfjRe0tDLGyy%2F%
+2Bw%2BMTjZLJO%2Bhfy%2B7e%2FilMuFoRqD%2BrFiVJ3HifTZ7QFrZnVr4JiA45GINtWwbJK5FttAvl
+OPFIqo3rrS5zGgJVqvypCfinN2yWzBcmy5iUXwvILFJzqf7poNBkfHoGWm1EoL8drU54DDRWWo7dLiif
+RtJtehI7%2B9bS08R3%2FOcUKwz2HL5RJovF3yBHfUZrE9ivnqBvWNT1dLp3J6PQpzbIV%2F7qisA0Uo
+LL4f5hKQqPpZE32h9HXoYX9TC4zWoibREKun6sq9rV1yV4ekwaABjYFoFcjQoer7P1lLt9dEwSB51khN
+9wODFeKG2nQ1kTjx3nepYcXY9ZOV32DT46c1puGzIcPg7mCIRr8aYdjK6KbLw%3D; path=/natural-
+language-classifier/api; secure; HttpOnly
+X-Global-Transaction-ID: 238672624
+Strict-Transport-Security: max-age=31536000;
+X-DP-Watson-Tran-ID: gateway-dp01-238672624
+
+{
+  "classifier_id" : "359f3fx202-nlc-99887",
+  "name" : "TutorialClassifier",
+  "language" : "en",
+  "created" : "2017-06-23T12:18:40.842Z",
+  "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api/v1
+/classifiers/359f3fx202-nlc-99887",
+  "status" : "Training",
+  "status_description" : "The classifier instance is in its training phase, not
+yet ready to accept classify requests"
+}
+
+
+Step 2 : Check readiness of classifier
+-----------------------------------------------------
+CURL Request:
+curl -k --user "2f6b3437-7857-46bb-bdd5-99e3a3d22a30":"KSuzM2yCyGW8" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/359f3fx202-nlc-99887"
+
+CURL Response:
+{
+  "classifier_id" : "359f3fx202-nlc-99887",
+  "name" : "TutorialClassifier",
+  "language" : "en",
+  "created" : "2017-06-23T12:18:40.842Z",
+  "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api/v1
+/classifiers/359f3fx202-nlc-99887",
+  "status" : "Training",
+  "status_description" : "The classifier instance is in its training phase, not
+yet ready to accept classify requests"
+}
+
+
+Step 3 : Classify Text
+-------------------------------------------
+CURL Request:
+curl -k -G --user "2f6b3437-7857-46bb-bdd5-99e3a3d22a30":"KSuzM2yCyGW8" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/359f3fx202-nlc-99887/classify" --data-urlencode "text=How hot will it be today?"
+
+CURL Response:
+{
+  "classifier_id" : "359f3fx202-nlc-99887",
+  "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api/v1
+/classifiers/359f3fx202-nlc-99887",
+  "text" : "How hot will it be today?",
+  "top_class" : "temperature",
+  "classes" : [ {
+    "class_name" : "temperature",
+    "confidence" : 0.9934848087578403
+  }, {
+    "class_name" : "conditions",
+    "confidence" : 0.006515191242159746
+  } ]
+}
